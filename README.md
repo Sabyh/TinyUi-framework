@@ -2,9 +2,7 @@
 
 > A lightweight frontend rendering and reactive‑state library, built from a simple todo app.
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 
 ---
 
