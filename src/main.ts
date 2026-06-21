@@ -3,6 +3,7 @@ import './css/style.css'
 import FullList from './model/FullList'
 import ListItem from './model/ListItem'
 import ListTemplate from './templates/ListTemplate'
+import { setupCounter } from './counter';
 
 const initApp = (): void => {
   const fullList = FullList.instance
@@ -10,6 +11,8 @@ const initApp = (): void => {
   let currentFilter: 'all' | 'active' | 'completed' = 'all'
 
   const itemCount = document.getElementById("itemCount") as HTMLElement
+  const totalCountEl = document.getElementById("totalCount") as HTMLElement | null
+  const activeCountEl = document.getElementById("activeCount") as HTMLElement | null
   const showAll = document.getElementById("showAll") as HTMLButtonElement
   const showActive = document.getElementById("showActive") as HTMLButtonElement
   const showCompleted = document.getElementById("showCompleted") as HTMLButtonElement
@@ -26,7 +29,9 @@ const initApp = (): void => {
 
   const updateItemCount = (): void => {
     const totalItems = fullList.list.length
-    itemCount.textContent = `${totalItems} items`
+    const activeItems = fullList.list.filter((i) => !i.checked).length
+    if (totalCountEl) totalCountEl.textContent = String(totalItems)
+    if (activeCountEl) activeCountEl.textContent = String(activeItems)
   }
 
   itemEntryForm.addEventListener("submit", (event: SubmitEvent): void => {
@@ -69,6 +74,15 @@ const initApp = (): void => {
 
   fullList.load()
   renderList()
+
+  // Example usage of setupCounter
+  const counterButton: HTMLButtonElement | null = document.getElementById("counterButton") as HTMLButtonElement
+  if (counterButton) {
+    setupCounter(counterButton)
+  }
+  else{
+    console.warn('Counter button not found in the DOM')
+  }
 }
 
 

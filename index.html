@@ -12,6 +12,9 @@
 
 <body>
   <main>
+    <div class="globalCounter">
+      <button id="counterButton" class="button">Count is 0</button>
+    </div>
     <h1 class="offscreen">My List</h1>
 
     <section class="newItemEntry">
@@ -36,7 +39,9 @@
       </header>
 
       <div class="listControls">
-        <div class="listControls__count" id="itemCount" aria-live="polite">0 items</div>
+        <div class="listControls__count" id="itemCount" aria-live="polite">
+          <span id="totalCount">0</span> items • <span id="activeCount">0</span> active
+        </div>
         <div class="listControls__filters" role="group" aria-label="Filter list items">
           <button id="showAll" class="button filterButton" type="button">All</button>
           <button id="showActive" class="button filterButton" type="button">Active</button>
