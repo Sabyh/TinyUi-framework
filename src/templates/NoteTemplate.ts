@@ -50,7 +50,11 @@ export default class NoteTemplate implements DOMList {
             deleteButton.setAttribute('aria-label', `Delete note ${note.title || 'untitled'}`)
 
 
-            deleteButton.addEventListener('click', () => {
+            deleteButton.addEventListener('click', (event: Event) => {
+                const target = event.currentTarget as HTMLButtonElement
+                const noteId = target.dataset.noteId
+                console.log('delete button clicked', { noteId })
+                if (!noteId) return
                 if (this.fullNotesList) {
                     this.fullNotesList.remove(note.id)
                     this.render(this.fullNotesList)
