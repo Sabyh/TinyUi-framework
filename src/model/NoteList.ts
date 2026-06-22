@@ -18,7 +18,7 @@ export default class NoteList implements noteList {
     push(note: NoteItem): void {
         this.list.push(note)
         this.save()
-    }
+    } 
 
     remove(id: string): void {
         this.list = this.list.filter(note => note.id !== id)

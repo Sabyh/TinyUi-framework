@@ -34,9 +34,30 @@ export default class NoteTemplate implements DOMList {
             const li = document.createElement('li')
             li.className = "note-item"
 
+            const header = document.createElement('div')
+            header.className = 'note-header'
+
             const title = document.createElement('h3')
             title.className = "note-title"
             title.textContent = note.title?.trim() || "Untitled note"
+
+            const deleteButton = document.createElement('button')
+            deleteButton.type = 'button'
+            deleteButton.className = 'button note-delete-button'
+            deleteButton.dataset.noteId = note.id
+            deleteButton.textContent = '✕'
+            deleteButton.title = 'Delete note'
+            deleteButton.setAttribute('aria-label', `Delete note ${note.title || 'untitled'}`)
+
+
+            deleteButton.addEventListener('click', () => {
+                if (this.fullNotesList) {
+                    this.fullNotesList.remove(note.id)
+                    this.render(this.fullNotesList)
+                }
+            })
+
+            header.append(title, deleteButton)
 
             const body = document.createElement('p')
             body.className = "note-body"
@@ -46,7 +67,7 @@ export default class NoteTemplate implements DOMList {
             updated.className = "note-updated"
             updated.textContent = note.updatedAt ? `Updated: ${note.updatedAt}` : ""
 
-            li.append(title, body, updated)
+            li.append(header, body, updated)
             this.ul.appendChild(li)
         })
     }
