@@ -69,3 +69,28 @@ This will turn your todo list into a real framework project:
 - `TinyUI` becomes the renderer and state layer
 - the app becomes a set of components
 - future features like directives, lifecycle, and routing can build on this core
+
+
+Great — here are four small, unrelated feature ideas you can add, with the model + template/component names and brief implementation steps. Pick one and I’ll implement it.
+
+1) Theme toggle (light/dark)
+- Model: `src/model/Prefs.ts` (stores `{ theme: 'light'|'dark' }`, load/save to localStorage)
+- Template/comp: `src/components/ThemeToggle.ts`
+- Steps: expose `toggleTheme()` on `Prefs`, render a button that calls it, add `.theme-light` / `.theme-dark` classes to `body`, persist choice.
+
+2) Small Notes panel (mini editor)
+- Model: `src/model/Note.ts` (id, title, body, updatedAt) and `src/model/Notes.ts` (array + save/load)
+- Template/comp: `src/components/NotesPanel.ts`
+- Steps: list notes, add/edit/delete note, persist to localStorage, provide a compact UI panel.
+
+3) Clipboard/snippet manager
+- Model: `src/model/Snippet.ts` and `src/model/Snippets.ts`
+- Template/comp: `src/components/SnippetManager.ts`
+- Steps: add snippet, copy-to-clipboard button, quick-search filter, save to localStorage.
+
+4) Undo/Redo history for UI actions
+- Model: `src/model/History.ts` (stack of serialized app states + pointer)
+- Template/comp: `src/components/HistoryControls.ts`
+- Steps: push state after add/remove/toggle, expose `undo()`/`redo()` methods, wire two buttons to call them and re-render.
+
+Which one do you want me to add now?

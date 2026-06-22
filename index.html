@@ -29,6 +29,22 @@
       </form>
     </section>
 
+    <section id="notesPanel" class="notesPanel">
+      <header class="notesTitle">
+        <h2>Notes</h2>
+      </header>
+      <form class="notesEntry__form" id="noteEntryForm">
+        <input class="notesEntry__input" id="newNoteTitle" type="text" maxlength="50" autocomplete="off"
+          placeholder="Note title" />
+        <textarea class="notesEntry__textarea" id="newNoteBody" maxlength="200"
+          placeholder="Note content"></textarea>
+        <button id="addNote" class="button notesEntry__button" type="submit" title="Add new note" aria-label="Add new note">
+          Add Note
+        </button>
+      </form>
+      <ul id="noteItems" class="noteItems"></ul>
+    </section>
+
     <section class="listContainer">
       <header class="listTitle">
         <h2 id="listName">List</h2>
