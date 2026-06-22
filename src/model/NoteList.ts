@@ -16,28 +16,38 @@ export default class NoteList implements noteList {
     static instance: NoteList = new NoteList()
 
     push(note: NoteItem): void {
-        NoteList.instance.list.push(note)
-        NoteList.instance.save()
+        this.list.push(note)
+        this.save()
     }
 
     remove(id: string): void {
-        NoteList.instance.list = NoteList.instance.list.filter(note => note.id !== id)
-        NoteList.instance.save()
+        this.list = this.list.filter(note => note.id !== id)
+        this.save()
     }
 
     clear(): void {
-        NoteList.instance.list = []
-        NoteList.instance.save()
+        this.list = []
+        this.save()
     }
 
     save(): void {
-        localStorage.setItem("myNotes", JSON.stringify(NoteList.instance.list))
+        localStorage.setItem("myNotes", JSON.stringify(this.list))
+        console.log('NoteList.save', { storedNotes: this.list.length })
     }
 
     load(): void {
         const notes = localStorage.getItem("myNotes")
         if (notes) {
-            NoteList.instance.list = JSON.parse(notes)
+            try {
+                const parsed = JSON.parse(notes)
+                this.list = parsed.map((item: any) => {
+                    const value = typeof item === 'string' ? JSON.parse(item) : item
+                    return NoteItem.fromJSON(value)
+                })
+            } catch (error) {
+                console.warn('NoteList.load failed to parse stored notes', error)
+                this.list = []
+            }
         }
     }
 
